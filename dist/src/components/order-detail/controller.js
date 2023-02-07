@@ -1,10 +1,14 @@
-import type { Request, Response } from "express";
-import prisma from "../../datasource";
-
-export const store = async (req: Request, res: Response): Promise<void> => {
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.updateOne = exports.getOne = exports.store = void 0;
+const datasource_1 = __importDefault(require("../../datasource"));
+const store = async (req, res) => {
     try {
         const data = req.body;
-        await prisma.orderDetails.create({
+        await datasource_1.default.orderDetails.create({
             data: {
                 quantity: data.quantity,
                 product: { connect: { id: data.product_id } },
@@ -16,15 +20,16 @@ export const store = async (req: Request, res: Response): Promise<void> => {
             body: data,
             message: "Order detail created successfully"
         });
-    } catch (error) {
+    }
+    catch (error) {
         res.status(500).json({ ok: false, message: "Server Error" });
     }
-}
-
-export const getOne = async (req: Request, res: Response): Promise<void> => {
+};
+exports.store = store;
+const getOne = async (req, res) => {
     try {
         const idOrder = Number(req.params.idOrder);
-        const orderDetail = await prisma.orderDetails.findMany({
+        const orderDetail = await datasource_1.default.orderDetails.findMany({
             where: {
                 order_id: idOrder,
             },
@@ -33,16 +38,17 @@ export const getOne = async (req: Request, res: Response): Promise<void> => {
             },
         });
         res.json({ ok: true, data: orderDetail, message: "All the products of the order were obtained" });
-    } catch (error) {
+    }
+    catch (error) {
         res.status(500).json({ ok: false, message: error });
     }
 };
-
-export const updateOne = async (req: Request, res: Response): Promise<void> => {
+exports.getOne = getOne;
+const updateOne = async (req, res) => {
     try {
         const data = req.body;
         const idOrder = Number(req.params.idOrder);
-        await prisma.orderDetails.updateMany({
+        await datasource_1.default.orderDetails.updateMany({
             where: {
                 order_id: idOrder,
                 id: data.orderDetail_id
@@ -52,14 +58,17 @@ export const updateOne = async (req: Request, res: Response): Promise<void> => {
                 quantity: data.quantity
             }
         });
-        const updateOrderDetail = await prisma.orderDetails.findMany({
+        const updateOrderDetail = await datasource_1.default.orderDetails.findMany({
             where: {
                 order_id: idOrder,
                 id: data.orderDetail_id
             },
-        })
-        res.status(200).json({ ok: true, data: updateOrderDetail, message: "Order detail updated!" });
-    } catch (error) {
+        });
+        res.json({ ok: true, data: updateOrderDetail, message: "Order detail updated!" });
+    }
+    catch (error) {
         res.status(500).json({ ok: false, message: error });
     }
 };
+exports.updateOne = updateOne;
+//# sourceMappingURL=controller.js.map

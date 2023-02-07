@@ -4,7 +4,6 @@ import prisma from "../../datasource";
 export const store = async (req: Request, res: Response): Promise<void> => {
     try {
         const data = req.body;
-        console.log(data)
         await prisma.supplier.create({ 
             
             data: {
@@ -18,6 +17,7 @@ export const store = async (req: Request, res: Response): Promise<void> => {
         
         });
         res.status(201).json({ ok: true, body: data });
+        
     } catch(error) {
         console.log(error)
         

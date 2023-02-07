@@ -1,8 +1,5 @@
 const request = require("supertest")
 import { app } from "../../src/app";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
 
 describe('category', () => {
 

@@ -34,7 +34,7 @@ describe('category', () => {
     };
 
     const result = await request(app)
-      .get('/api/v1/categories/20/')
+      .get('/api/v1/categories/200/')
       .expect(400)
 
       expect(result.body).toEqual(expectedResponse)

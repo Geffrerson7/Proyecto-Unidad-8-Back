@@ -41,7 +41,7 @@ model Product {
 model Supplier {
   id  Int  @id @default(autoincrement())
   name String
-  description String?
+  description String? @default(" ")
   contact_number String
   email String
   address String

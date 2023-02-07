@@ -11,10 +11,11 @@ describe('category', () => {
 
   //   const result = await request(app)
   //     .post('/api/v1/categories/')
-  //     .send({name: "categoria", max_storage_temperature: 30.0, min_storage_temperature: 20.0})
+  //     .send({name: "nueva categoria", max_storage_temperature: 30.0, min_storage_temperature: 20.0})
   //     .expect(201)
-
-  //     expect(result.body).toEqual(expectedResponse)
+  //     // expect(result.body).toEqual(expectedResponse)
+  //     expect(result.body.ok).toBe(true);
+  //     expect(result.body.message).toEqual("Category created successfully")
     
   // });
 
